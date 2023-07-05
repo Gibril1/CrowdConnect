@@ -17,6 +17,7 @@ event = APIRouter(
 
 @event.post('/create', status_code=status.HTTP_201_CREATED, response_model=ResponseSchema)
 def create_event(event: EventSchema, db: Session = Depends(get_db) , current_user: UserRegistration = Depends(get_current_user)):
+    return 'event'
     return create(db, event, current_user)
 
 
