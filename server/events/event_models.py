@@ -15,9 +15,10 @@ class Event(BASE):
 
     created_by = relationship('User', back_populates='events')
 
-    def __init__(self, name: str, description: str = None):
+    def __init__(self, name: str, user_id, description: str = None):
         self.name = name
         self.description = description
+        self.user_id = user_id
         self.get_entry_code()
 
 
@@ -33,7 +34,7 @@ class Event(BASE):
     def get_entry_code(self):
         session = SessionLocal()
         entry_code = self.generate_random_numbers_string()
-        event = session.query(Event).filter(Event.entry_code == entry_code).filter(Event.is_active == False).first()
+        event = session.query(Event).filter(Event.entry_code == entry_code).filter(Event.is_active == True).first()
         if not event:
             self.entry_code = entry_code
             session.commit()

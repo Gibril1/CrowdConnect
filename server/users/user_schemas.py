@@ -7,6 +7,10 @@ class UserRegistration(BaseModel):
     email: str
     password: str
 
+
+class CurrentUser(UserRegistration):
+    id: int
+
 class RegisterResponse(BaseModel):
     username: str
     email: str
