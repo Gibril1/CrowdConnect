@@ -10,7 +10,6 @@ class UserRegistration(BaseModel):
 class RegisterResponse(BaseModel):
     username: str
     email: str
-    blog: List[ResponseSchema] = []
+    
     class Config:
         orm_mode = True
-

@@ -11,7 +11,7 @@ user = APIRouter(
 )
 
 
-@user.post('/register', status_code=status.HTTP_201_CREATED,response_model=RegisterResponse)
+@user.post('/register', status_code=status.HTTP_201_CREATED, response_model=RegisterResponse)
 def create_user(user:UserRegistration, db:Session = Depends(get_db)):
     return register(user, db)
 
