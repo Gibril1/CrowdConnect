@@ -4,15 +4,16 @@ from config.db import BASE, SessionLocal
 import random
 
 class Event(BASE):
-    __tablename__ = 'event'
+    __tablename__ = 'events'
+    
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     description = Column(String)
     is_active = Column(Boolean, default=True)
     entry_code = Column(String)
-    # user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
 
-    # created_by = relationship('User', back_populates='events')
+    created_by = relationship('User', back_populates='events')
 
     def __init__(self, name: str, description: str = None):
         self.name = name

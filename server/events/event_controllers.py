@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from .event_models import Event
 from .event_schemas import EventSchema, UpdateEventSchema
 
-def create(db: Session, event:EventSchema):
-    new_event = Event(event)
+def create(db: Session, event:EventSchema, current_user):
+    new_event = Event(name=event.name, description=event.description, user_id = current_user)
     db.add(new_event)
     db.commit()
     db.refresh(new_event)

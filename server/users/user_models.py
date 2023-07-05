@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from config.db import BASE
 
@@ -10,4 +10,5 @@ class User(BASE):
     email = Column(String, unique=True)
     password = Column(String)
 
-    # events = relationship('Event', back_populates='created_by')
+    events = relationship('Event', back_populates='created_by')
+
