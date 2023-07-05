@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from events import event_models
 
@@ -9,7 +8,6 @@ from events.event_routes import event
 from auth.auth_routes import auth
 
 event_models.BASE.metadata.create_all(engine)
-load_dotenv()
 
 
 

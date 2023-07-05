@@ -1,6 +1,10 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from .auth_schema import TokenData
+from dotenv import load_dotenv
+load_dotenv()
+
+
 import os
 
 SECRET_KEY = os.getenv('SECRET_KEY')

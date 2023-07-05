@@ -13,7 +13,7 @@ def login(user:UserLogin, db:Session):
     if not Hash.verify(user.password, user_exists.password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Invalid Credentials')
 
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(
         data={"sub": user_exists.email}, expires_delta=access_token_expires
     )
