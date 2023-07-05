@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from events import event_schemas
+from events import event_models
 
-from config.db import engine, SessionLocal
+from config.db import engine
 
 from users.user_routes import user
 from events.event_routes import event
 
-event_schemas.BASE.metadata.create_all(engine)
+event_models.BASE.metadata.create_all(engine)
 load_dotenv()
 
 

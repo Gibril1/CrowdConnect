@@ -1,9 +1,20 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from config.db import BASE
+from pydantic import BaseModel
+from typing import Optional
 
-class EventSchema(BASE):
-    __tablename__ = 'event'
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    description = Column(String)
-    is_active = Column(Boolean, default=True)
+class EventSchema(BaseModel):
+    name: str
+    description: Optional[str] = None
+    
+    
+
+class UpdateEventSchema(BaseModel):
+    name: str
+    description: Optional[str] = None
+    is_active: bool = False
+
+
+class ResponseSchema(EventSchema):
+    id: int
+    entry_code: str
+    class Config:
+        orm_mode = True

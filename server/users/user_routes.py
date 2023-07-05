@@ -1,11 +1,20 @@
-from fastapi import APIRouter
-from users.user_models import UserRegistration, UserLogin
-user = APIRouter()
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.orm import Session
+from .user_schemas import UserRegistration, UserLogin, RegisterResponse
 
-@user.post('/register')
-async def create_user(user:UserRegistration):
-    return user
+from .user_controllers import register, login
+from config.db import get_db
+
+user = APIRouter(
+    prefix='/api/v1/users',
+    tags=['Users']
+)
+
+
+@user.post('/register', status_code=status.HTTP_201_CREATED,response_model=RegisterResponse)
+def create_user(user:UserRegistration, db:Session = Depends(get_db)):
+    return register(user, db)
 
 @user.post('/login')
-async def create_user(user:UserLogin):
-    return user
+def login_user(user:UserLogin, db:Session = Depends(get_db)):
+    return login(user)

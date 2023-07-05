@@ -1,10 +1,13 @@
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from config.db import BASE
 
-class UserRegistration(BaseModel):
-    username: str
-    email: str
-    password: str
+class User(BASE):
+    __tablename__ = 'users'
 
-class UserLogin(BaseModel):
-    email: str
-    password: str
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String, unique=True)
+    password = Column(String)
+
+    # events = relationship('Event', back_populates='created_by')
