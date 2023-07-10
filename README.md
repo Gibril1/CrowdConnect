@@ -1,0 +1,3 @@
+## Crowd Connect
+
+Crowd Connect is an innovative platform designed to bridge the gap between event participants and their ability to contribute and share their views. By generating a unique 6-digit code for each event, Crowd Connect empowers individuals to voice their opinions seamlessly and anonymously through a dedicated website. This interactive and inclusive solution encourages even the shyest attendees to actively engage, fostering a vibrant and diverse exchange of ideas. With Crowd Connect, events become more inclusive, ensuring every participant has a voice that can shape the conversation and contribute to a more impactful and engaging experience
