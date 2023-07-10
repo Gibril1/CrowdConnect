@@ -7,6 +7,13 @@ class UserRegistration(BaseModel):
     email: str
     password: str
 
+class ChangePassword(BaseModel):
+    password: str
+
+class EditUser(BaseModel):
+    username: str
+    email: str
+    
 
 class CurrentUser(UserRegistration):
     id: int
