@@ -11,4 +11,5 @@ class User(BASE):
     password = Column(String)
 
     events = relationship('Event', back_populates='created_by')
+    comments = relationship('Comment', back_populates='created_by')
 

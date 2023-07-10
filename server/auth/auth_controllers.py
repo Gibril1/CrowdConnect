@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
-from .token import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from .token import create_access_token
 from users.user_models import User
 from users.hashing import Hash
 

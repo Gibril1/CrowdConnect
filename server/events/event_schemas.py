@@ -12,7 +12,14 @@ class UpdateEventSchema(BaseModel):
     description: Optional[str] = None
     is_active: bool = False
 
+class EntrySchema(BaseModel):
+    entry_code: str
 
+
+class ResponseEntryCode(EntrySchema):
+    class Config:
+        orm_mode = True
+    
 class ResponseSchema(EventSchema):
     id: int
     entry_code: str

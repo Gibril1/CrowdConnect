@@ -14,6 +14,7 @@ class Event(BASE):
     user_id = Column(Integer, ForeignKey('users.id'))
 
     created_by = relationship('User', back_populates='events')
+    comments = relationship('Comment', back_populates='events')
 
     def __init__(self, name: str, user_id, description: str = None):
         self.name = name
