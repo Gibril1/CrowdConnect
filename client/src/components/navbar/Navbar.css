@@ -1,0 +1,21 @@
+.navbar{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px;
+}
+
+.logo{
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: var(--primary-color);
+    font-family: 'Tilt Prism', cursive;
+
+}
+
+.logo{
+    cursor: pointer;
+}
+
+
