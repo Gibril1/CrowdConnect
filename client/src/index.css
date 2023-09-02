@@ -44,14 +44,22 @@
     border: 1px solid var(--primary-color);
 }
 
-.btn-border:hover{
-    background-color: #3B3355;
-    color: var(--white-color);
-    transition: 2s ease-in-out;
-}
+
 
 .btn:hover{
     cursor: pointer;
 }
 
+.btn-auth{
+    border: none;
+}
+
+.btn-auth:hover{
+    transform: scale(1.1);
+}
+
+img{
+    height: 100%;
+    width: 100%;
+}
 
