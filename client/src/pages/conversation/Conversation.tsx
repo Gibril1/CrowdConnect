@@ -1,8 +1,11 @@
+import Navbar from "../../components/navbar/Navbar"
+
 
 const Conversation = () => {
   return (
     <div>
-      <h1>Conversation</h1>
+        <Navbar/>
+        <h1>Conversation</h1>
     </div>
   )
 }

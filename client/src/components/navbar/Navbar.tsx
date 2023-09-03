@@ -9,8 +9,8 @@ const Navbar = () => {
   const dispatch = useAppDispatch()
 
   const handleLogout = () => {
-    console.log('please logging out')
     dispatch(logout())
+    navigate('/')
   }
   const { user } = useAppSelector((state) => state.auth)
   return (

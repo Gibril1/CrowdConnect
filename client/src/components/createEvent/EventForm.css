@@ -1,0 +1,23 @@
+.create-event{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 100%;
+}
+
+.formController{
+    padding: 20px;
+    margin-bottom: 10px;
+    width: 60%;
+}
+.formController input,
+.formController textarea{
+    width: 100%;
+}
+
+.formController textarea{
+    padding: 10px;
+}
+
