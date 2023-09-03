@@ -1,10 +1,16 @@
 import Navbar from "../navbar/Navbar"
 import './EventForm.css'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { toast } from 'react-toastify'
 import { IEventInterface } from '../../interfaces/EventInterface'
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { create, reset } from "../../services/event/EventSlice"
+import { useNavigate } from "react-router-dom"
 
 const EventForm = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     name: '',
     description: ''
@@ -18,7 +24,13 @@ const EventForm = () => {
   }
 
   const { name, description } = formData
-  
+  const { events, isSuccess, isLoading } = useAppSelector((state)=> state.event)
+
+  useEffect(() => {
+    if(isSuccess && events){
+      toast.success(`You hav successfully created an event. The code is ${events[0].entry_code}`)
+    }
+  },[])
   const handleSubmit = async(e:any) => {
     e.preventDefault()
 
@@ -32,10 +44,10 @@ const EventForm = () => {
       description
     }
 
-    console.log({
-      eventData
-    })
+    dispatch(create(eventData))
+    dispatch(reset())
   }
+
   return (
     <div>
         <Navbar/>
@@ -58,7 +70,15 @@ const EventForm = () => {
               placeholder="Describe the event"></textarea>
             </div>
             <div>
+              { isLoading ? (
+                <>
+                <button className="btn btn-primary">Creating Event...</button>
+                </>
+              ) : (
+                <>
               <button className="btn btn-primary">Create Event</button>
+                </>
+              )}
             </div>
           </form>
         </div>
