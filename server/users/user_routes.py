@@ -18,7 +18,7 @@ def create_user(user:UserRegistration, db:Session = Depends(get_db)):
     return register(user, db)
 
 
-@user.put('/edit-details',status_code=status.HTTP_200_OK,response_model = RegisterResponse)
+@user.put('/edit-details',status_code=status.HTTP_200_OK)
 def edit_account_details(user:EditUser, 
             db:Session = Depends(get_db),
             current_user:CurrentUser = Depends(get_current_user)):

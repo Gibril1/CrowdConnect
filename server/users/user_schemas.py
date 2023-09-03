@@ -18,9 +18,12 @@ class EditUser(BaseModel):
 class CurrentUser(UserRegistration):
     id: int
 
+
 class RegisterResponse(BaseModel):
+    access_token: str
+    token_type: str
     username: str
-    email: str
+    # email: str
     
     class Config:
         orm_mode = True
