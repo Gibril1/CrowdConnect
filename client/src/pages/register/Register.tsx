@@ -59,13 +59,17 @@ const Register = () => {
 
   useEffect(() => {
     if(isError){
+        console.log('we are here. there is an error')
+        console.log({
+          user, isError, isLoading, isSuccess
+        })
         toast.error('An error occurred during sign up')
         return
     }
 
     if(isSuccess && user !== undefined){
-        toast.success('Register successful')
-        navigate('/login')
+        toast.success('Registeration successful')
+        navigate('/new')
     }
     dispatch(reset())
     },[isError, isSuccess, user, dispatch, navigate])

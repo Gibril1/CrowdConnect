@@ -52,7 +52,7 @@ const Login = () => {
 
     if(isSuccess && user !== undefined){
         toast.success('Login successful')
-        navigate('/chat')
+        navigate('/events')
     }
     dispatch(reset())
     },[isError, isSuccess, user, dispatch, navigate])

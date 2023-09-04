@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import eventService from "./EventService";
-import { IEventInterface } from "../../interfaces/EventInterface";
+import { IEventCard, IEventInterface } from "../../interfaces/EventInterface";
 import { IToken } from "../../interfaces/AuthInterface";
 export interface EventState {
-    events: IEventInterface[],
+    events: IEventCard[],
     isError: boolean,
     isSuccess: boolean,
     isLoading: boolean,
@@ -21,11 +21,26 @@ const initialState = {
 export const create = createAsyncThunk('event/create', async(event:IEventInterface, thunkAPI) => {
     try {
         const tokenString = localStorage.getItem('user') 
-        console.log('getting the data and the token')
-        console.log({ event, tokenString})
         if(tokenString){
         const token:IToken = JSON.parse(tokenString) 
         return await eventService.createEvent(event, token.access_token)
+        }
+    } catch (error:any) {
+        const message = (error.response &&
+            error.response.data &&
+            error.response.data.message)||
+            error.message ||
+            error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+export const getAll = createAsyncThunk('events/get', async(_, thunkAPI) =>{
+    try {
+        const tokenString = localStorage.getItem('user')
+        if(tokenString){
+            const token:IToken = JSON.parse(tokenString)
+            return await eventService.getEvents(token.access_token)
         }
     } catch (error:any) {
         const message = (error.response &&
@@ -66,6 +81,22 @@ export const eventSlice = createSlice({
                 state.isError = false
                 state.isSuccess = true
                 state.events.push(action.payload)
+            })
+            .addCase(getAll.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isError = false
+                state.isSuccess = true
+                state.events = action.payload
+            })
+            .addCase(getAll.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getAll.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.events = []
+                state.message = action.payload
             })
     }
 })

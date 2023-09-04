@@ -10,13 +10,24 @@ const createEvent = async(eventData:IEventInterface, token:string) => {
     }
     const response = await axios.post(API_URL_LOCAL+'event/create', eventData, config)
 
-    console.log('event data response')
-    console.log(response)
+    return response.data
+}
+
+const getEvents = async(token:string) => {
+    const config = {
+        headers : {
+            'Authorization': `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.get(API_URL_LOCAL+'event', config)
+
     return response.data
 }
 
 const eventService = {
-    createEvent
+    createEvent,
+    getEvents
 }
 
 export default eventService

@@ -1,10 +1,10 @@
 import Navbar from "../navbar/Navbar"
 import './EventForm.css'
-import { useState, useEffect} from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { IEventInterface } from '../../interfaces/EventInterface'
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { create, reset } from "../../services/event/EventSlice"
+import { create } from "../../services/event/EventSlice"
 import { useNavigate } from "react-router-dom"
 
 const EventForm = () => {
@@ -24,13 +24,11 @@ const EventForm = () => {
   }
 
   const { name, description } = formData
-  const { events, isSuccess, isLoading } = useAppSelector((state)=> state.event)
 
-  useEffect(() => {
-    if(isSuccess && events){
-      toast.success(`You hav successfully created an event. The code is ${events[0].entry_code}`)
-    }
-  },[])
+  const { isSuccess, isLoading } = useAppSelector((state)=> state.event)
+
+  
+  
   const handleSubmit = async(e:any) => {
     e.preventDefault()
 
@@ -45,7 +43,14 @@ const EventForm = () => {
     }
 
     dispatch(create(eventData))
-    dispatch(reset())
+
+    if(isSuccess){
+      toast.success('You have created your  event')
+      navigate('/events')
+    }
+
+  
+    
   }
 
   return (

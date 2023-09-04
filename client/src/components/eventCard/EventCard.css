@@ -1,0 +1,14 @@
+.event-card{
+    margin: 10px 0;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.green-border {
+    border: 1px solid green;
+}
+
+.red-border{
+    border: 1px solid red;
+}
