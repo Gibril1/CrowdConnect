@@ -7,7 +7,7 @@ from .event_schemas import (
     UpdateEventSchema, 
     ResponseSchema, 
     EntrySchema, 
-    ResponseEntryCode
+    # ResponseEntryCode
     )
 
 from .event_controllers import (
@@ -30,7 +30,7 @@ event = APIRouter(
 
 
 # @desc Create Events
-@event.post('/create', status_code=status.HTTP_201_CREATED, response_model=ResponseEntryCode)
+@event.post('/create', status_code=status.HTTP_201_CREATED, response_model=ResponseSchema)
 def create_event(event: EventSchema, db: Session = Depends(get_db) , current_user: CurrentUser = Depends(get_current_user)):
     return create(db, event, current_user)
 
