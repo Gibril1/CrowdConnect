@@ -2,9 +2,11 @@ from fastapi import status, HTTPException
 from sqlalchemy.orm import Session
 from config.db import SessionLocal
 from .event_models import Event
-from .event_schemas import EventSchema, UpdateEventSchema, EntrySchema
+from .event_schemas import EventSchema, UpdateEventSchema, EntrySchema, AvailabilitySchema
 from users.user_schemas import CurrentUser
 from users.user_models import User
+from comments.comment_models import Comment
+from comments.comments_schemas  import CommentSchema
 
 def get_user_id(payload):
     session = SessionLocal()
@@ -56,5 +58,9 @@ def update(id:int, db:Session, event:UpdateEventSchema, current_user:CurrentUser
 def check_event(entry:EntrySchema, db:Session):
     event = db.query(Event).filter(Event.entry_code == entry.entry_code).filter(Event.is_active == True).first()
     if event:
-        return event
+        comments = db.query(Comment).filter(Comment.events_id == event.id).all()
+    
+        return {'event': event, 'comments':comments}
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Incorrect entry code')
+
+

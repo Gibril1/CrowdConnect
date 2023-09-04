@@ -7,7 +7,7 @@ from .event_schemas import (
     UpdateEventSchema, 
     ResponseSchema, 
     EntrySchema, 
-    # ResponseEntryCode
+    AvailabilitySchema
     )
 
 from .event_controllers import (
@@ -36,7 +36,7 @@ def create_event(event: EventSchema, db: Session = Depends(get_db) , current_use
 
 
 # @user enters the entry code to comment on an event
-@event.post('/event', status_code=status.HTTP_200_OK,response_model=ResponseSchema)
+@event.post('/event', status_code=status.HTTP_200_OK)
 def check_event_availability(entry:EntrySchema, db:Session=Depends(get_db)):
     return check_event(entry, db)
 
