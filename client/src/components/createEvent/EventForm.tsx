@@ -25,7 +25,7 @@ const EventForm = () => {
 
   const { name, description } = formData
 
-  const { isSuccess, isLoading } = useAppSelector((state)=> state.event)
+  const { isLoading } = useAppSelector((state)=> state.event)
 
   
   
@@ -42,16 +42,13 @@ const EventForm = () => {
       description
     }
 
-    dispatch(create(eventData))
+    await dispatch(create(eventData))   
 
-    if(isSuccess){
-      toast.success('You have created your  event')
-      navigate('/events')
-    }
+    toast.success('You have created an event')
+    navigate('/events')
+  }
 
   
-    
-  }
 
   return (
     <div>

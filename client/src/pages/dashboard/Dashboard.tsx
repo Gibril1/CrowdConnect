@@ -18,7 +18,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-page"> 
-        {events.length === 0 ? (
+        {events && events.length === 0 ? (
           <>
           <h2>You have not created any events yet</h2>
           </>

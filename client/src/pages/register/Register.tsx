@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import Navbar from "../../components/navbar/Navbar"
+import {Navbar} from "../../components/index"
 import './Register.css'
 import RegisterImage from '../../assets/register.jpg'
 
@@ -27,7 +27,6 @@ const Register = () => {
       ...prevState,
       [e.target.name]:e.target.value
     }))
-
   }
 
   const { username, email, password, password2 } = formData

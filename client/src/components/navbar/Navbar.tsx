@@ -1,7 +1,7 @@
 import './Navbar.css'
 import { useNavigate } from 'react-router-dom'
 import {GiConvergenceTarget} from 'react-icons/gi'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { useAppDispatch } from '../../app/hooks'
 import { logout } from '../../services/auth/AuthSlice'
 
 const Navbar = () => {
@@ -12,19 +12,20 @@ const Navbar = () => {
     dispatch(logout())
     navigate('/')
   }
-  const { user } = useAppSelector((state) => state.auth)
+  
+  const user = localStorage.getItem('user')
   return (
     <div className='navbar'>
         <h1 className='logo' onClick={() => navigate('/')}>Crowd Connect <span><GiConvergenceTarget/></span></h1>
         { user ? (
           <>
-            <p className='btn btn-border' onClick={() => navigate('/login')}>Login</p>
-            <p className='btn btn-primary' onClick={() => navigate('/register')}>Join Here</p>
+            <button className='btn btn-primary' onClick={() => navigate('/new')}>New Event</button>
+            <button className='btn btn-border' onClick={handleLogout}>Logout</button>
           </> 
         ):(
           <>
-            <p className='btn btn-primary' onClick={() => navigate('/new')}>New Event</p>
-            <p className='btn btn-border' onClick={handleLogout}>Logout</p>
+            <button className='btn btn-border' onClick={() => navigate('/login')}>Login</button>
+            <button className='btn btn-primary' onClick={() => navigate('/register')}>Join Here</button>
           </>
           
         )}

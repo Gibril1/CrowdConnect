@@ -1,7 +1,9 @@
-import Navbar from "../../components/navbar/Navbar";
 import './Home.css'
 import {PiNumberOneLight, PiNumberTwoLight, PiNumberThreeLight} from 'react-icons/pi'
 import {BiConversation} from 'react-icons/bi'
+import { CodeInputForm, Navbar } from '../../components';
+
+
 const Home = () => {
   // style icons
   let icons = { border: '1px solid #3b3355', fontSize: '50px', borderRadius: '50%', padding: '15px'}
@@ -13,8 +15,7 @@ const Home = () => {
           <h1>Amplify Every Voice, Inspire Meaningful<br></br><span className="align-center mr-1">Connections with Crowd Connect</span><BiConversation/></h1>
         </div>
         <div className="input-container">
-          <input type="text" name="eventId" id="eventId" placeholder="Enter 6 digit code...." />
-          <button type="submit" className="btn btn-primary">Enter</button>
+          <CodeInputForm/>
         </div>
         <div className="showcase">
           <div className="section">

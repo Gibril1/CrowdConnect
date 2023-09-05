@@ -12,3 +12,7 @@ export interface IEventCard{
     is_active: boolean
 
 }
+
+export interface IEventID{
+    eventId: string
+}

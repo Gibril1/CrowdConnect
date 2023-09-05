@@ -1,12 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import authReducer from '../services/auth/AuthSlice'
 import eventReducer from '../services/event/EventSlice'
-
+import conversationReducer from "../services/conversation/ConversationSlice";
 
 export const store = configureStore({
     reducer:{
         auth: authReducer,
-        event: eventReducer
+        event: eventReducer,
+        conversation: conversationReducer
     }
 })
 

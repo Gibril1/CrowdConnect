@@ -1,12 +1,20 @@
-import Navbar from "../../components/navbar/Navbar"
+import { useAppSelector } from "../../app/hooks"
+import { CommentForm, Comments, Navbar, EventCard } from "../../components"
+
 
 
 const Conversation = () => {
+  const { conversations } = useAppSelector((state) => state.conversation)
   return (
-    <div>
-        <Navbar/>
-        <h1>Conversation</h1>
-    </div>
+    <>
+      <Navbar/>
+      <main>
+        <EventCard eventDetail={conversations?.event}/>
+        <Comments/>
+        <CommentForm/>
+
+      </main>
+    </>
   )
 }
 

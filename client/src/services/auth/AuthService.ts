@@ -21,15 +21,12 @@ const loginUser = async(userData:ILoginUser) => {
         }
     }
 
-    
     const response = await axios.post(API_URL_LOCAL+'auth/login', userData, config)
 
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data))
     }
     
-    console.log('login response')
-    console.log(response.data)
     return response.data
 }
 

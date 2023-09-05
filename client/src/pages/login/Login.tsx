@@ -1,4 +1,4 @@
-import Navbar from "../../components/navbar/Navbar"
+import{ Navbar} from "../../components/index"
 import '../register/Register.css'
 import LoginImage from '../../assets/register.jpg'
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
@@ -46,7 +46,7 @@ const Login = () => {
 
   useEffect(() => {
     if(isError){
-        toast.error('An error occurred during sign up')
+        toast.error('Invalid Credentials')
         return
     }
 
