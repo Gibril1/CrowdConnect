@@ -1,4 +1,5 @@
 import CodeInputForm from "./checkEvent/CodeInputForm";
+import CommentCard from "./commentCard/CommentCard";
 import Comments from "./comments/Comments";
 import CommentForm from "./createComment/CommentForm";
 import EventForm from "./createEvent/EventForm";
@@ -12,5 +13,6 @@ export {
     EventCard,
     Navbar,
     CommentForm,
-    Comments
+    Comments,
+    CommentCard
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { IEventCard } from "../../interfaces/EventInterface";
+import { IEventCard } from "../../interfaces/index";
 import './EventCard.css'
 
 interface EventCardProps {

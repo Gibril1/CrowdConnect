@@ -1,11 +1,23 @@
+import React from 'react';
+import { CommentCard } from '../../components/index';
+import { IComment } from '../../interfaces/index';
 
-
-const Comments = () => {
-  return (
-    <div>
-      <h1>Comments</h1>
-    </div>
-  )
+interface CommentsProps {
+  comments: IComment[];
 }
 
-export default Comments
+const Comments: React.FC<CommentsProps> = ({ comments }) => {
+  return (
+    <div>
+      {comments.length === 0 ? (
+        <h2>Start the conversation by sending your inputs</h2>
+      ) : (
+        comments.map((comment: IComment) => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))
+      )}
+    </div>
+  );
+};
+
+export default Comments;

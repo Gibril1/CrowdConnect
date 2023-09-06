@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IEventCard, IEventID } from '../../interfaces/EventInterface'
+import { IEventCard, IEventCode } from '../../interfaces/index'
 import { IComment } from '../../interfaces/CommentInterface'
 import conversationService from "./ConversationService";
 
@@ -24,11 +24,25 @@ const initialState = {
     message: '',
 } as ConversationState
 
-export const checkEventAvailability = createAsyncThunk('event/availability', async(eventId:IEventID, thunkAPI) => {
+export const checkEventAvailability = createAsyncThunk('event/availability', async(eventId:IEventCode, thunkAPI) => {
     try {
         return await conversationService.checkEvent(eventId)
     } catch (error:any) {
-        const message: string = (error.response &&
+        const message = (error.response &&
+            error.response.data &&
+            error.response.data.message)||
+            error.message ||
+            error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+
+})
+
+export const createComment = createAsyncThunk('comment/create', async(comment:IComment,  thunkAPI) => {
+    try {
+        return conversationService.createComment(comment)
+    } catch (error:any) {
+        const message = (error.response &&
             error.response.data &&
             error.response.data.message)||
             error.message ||
@@ -68,6 +82,24 @@ export const conversationSlice = createSlice({
                 state.isSuccess = true
                 state.conversations = action.payload
             })
+            .addCase(createComment.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(createComment.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(createComment.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isError = false
+                state.isSuccess = true
+                state.conversations = state.conversations
+                ? { ...state.conversations, comments: [...state.conversations.comments, action.payload] }
+                : null;
+            })
+            
     }
 })
 

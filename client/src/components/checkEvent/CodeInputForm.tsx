@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import '../../index.css'
 import { checkEventAvailability } from '../../services/conversation/ConversationSlice'
@@ -6,6 +7,8 @@ import { useState, ChangeEvent } from 'react'
 
 const CodeInputForm = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         eventId: ''
     })
@@ -28,10 +31,11 @@ const CodeInputForm = () => {
         }
 
         const eventInfo = {
-          eventId
+          'entry_code': eventId
         }
 
         dispatch(checkEventAvailability(eventInfo))
+        navigate('/chat')
     }
   return (
     <form onSubmit={handleSubmit}>

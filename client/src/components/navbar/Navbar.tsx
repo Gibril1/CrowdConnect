@@ -1,7 +1,7 @@
 import './Navbar.css'
 import { useNavigate } from 'react-router-dom'
 import {GiConvergenceTarget} from 'react-icons/gi'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { logout } from '../../services/auth/AuthSlice'
 
 const Navbar = () => {
@@ -13,7 +13,8 @@ const Navbar = () => {
     navigate('/')
   }
   
-  const user = localStorage.getItem('user')
+  
+  const { user } = useAppSelector((state) => state.auth)
   return (
     <div className='navbar'>
         <h1 className='logo' onClick={() => navigate('/')}>Crowd Connect <span><GiConvergenceTarget/></span></h1>

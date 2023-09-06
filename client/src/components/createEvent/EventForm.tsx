@@ -2,7 +2,7 @@ import Navbar from "../navbar/Navbar"
 import './EventForm.css'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { IEventInterface } from '../../interfaces/EventInterface'
+import { IEventInterface } from '../../interfaces/index'
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { create } from "../../services/event/EventSlice"
 import { useNavigate } from "react-router-dom"

@@ -13,6 +13,6 @@ export interface IEventCard{
 
 }
 
-export interface IEventID{
-    eventId: string
+export interface IEventCode{
+    entry_code: string
 }

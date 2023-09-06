@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IComment  } from '../../interfaces/CommentInterface'
+import { IComment, ICommentData  } from '../../interfaces/CommentInterface'
 import commentService from "./CommentService";
 
 interface CommentState {
@@ -20,9 +20,9 @@ const initialState = {
 
 
 
-export const create = createAsyncThunk('comment/create', async(comment:IComment, thunkAPI) => {
+export const create = createAsyncThunk('comment/create', async(comment:ICommentData, id, thunkAPI) => {
     try {
-        return await commentService.createComment(comment)
+        return await commentService.createComment(comment, id)
     } catch (error:any) {
         const message = (error.response &&
             error.response.data &&

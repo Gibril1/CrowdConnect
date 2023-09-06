@@ -1,9 +1,10 @@
-import { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../../app/hooks'
-import { create } from '../../services/comments/CommentSlice'
+import { IEventId, IComment } from '../../interfaces/index'
+import { createComment } from '../../services/conversation/ConversationSlice'
 
-const CommentForm = () => {
+const CommentForm:React.FC<IEventId> = ({ id }) => {
     const dispatch = useAppDispatch()
     const [formData, setFormData] = useState({
         comment: ''
@@ -24,13 +25,13 @@ const CommentForm = () => {
             return
         }
 
-        const commentData = {
-            comment
+        const commentData: IComment = {
+            comment,
+            id
         }
         
-        console.log({ commentData})
 
-        dispatch(create(commentData))
+        dispatch(createComment(commentData))
     }
   return (
     <div>
