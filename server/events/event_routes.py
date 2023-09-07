@@ -46,7 +46,7 @@ def get_event_details(id:int, db: Session = Depends(get_db) , current_user: Curr
     return retrieve(id, db, current_user)
 
 
-@event.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@event.delete('/{id}', status_code=status.HTTP_200_OK)
 def delete_event(id:int, db: Session = Depends(get_db), current_user: CurrentUser = Depends(get_current_user)):
     return delete(id, db, current_user)
 

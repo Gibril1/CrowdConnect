@@ -37,23 +37,33 @@ def retrieve(id:int, db:Session, current_user:CurrentUser):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'You do not have such event')
     return event
 
-def delete(id:int, db:Session, current_user:CurrentUser):
+def delete(id: int, db: Session, current_user: CurrentUser):
     user = get_user_id(current_user)
-    event = db.query(Event).filter(Event.id == id).filter(Event.user_id == user)
-    if not event.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'You cannot delete such an event')
-    event.delete(synchronize_session=False)
-    db.commit()
-    return
+    event = db.query(Event).filter(Event.id == id, Event.user_id == user).first()
 
-def update(id:int, db:Session, event:UpdateEventSchema, current_user:CurrentUser):
+    if not event:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Event not found')
+
+    event_id = event.id
+    db.delete(event)
+    db.commit()
+    return event_id
+
+
+
+def update(id: int, db: Session, event: UpdateEventSchema, current_user: CurrentUser):
     user = get_user_id(current_user)
-    updated_event = db.query(Event).filter(Event.id == id).filter(Event.user_id == user)
-    if not updated_event.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'You cannot edit the details of such an event')
-    updated_event.update(event)
+    
+    updated_event = db.query(Event).filter(Event.id == id, Event.user_id == user).first()
+    
+    if not updated_event:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Event not found')
+    
+    for attr, value in event.dict().items():
+        setattr(updated_event, attr, value)
     db.commit()
     return updated_event
+
 
 def check_event(entry:EntrySchema, db:Session):
     event = db.query(Event).filter(Event.entry_code == entry.entry_code).filter(Event.is_active == True).first()
