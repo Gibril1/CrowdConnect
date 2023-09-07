@@ -1,6 +1,6 @@
 import { ICommentData, IComment, IEventId } from "./CommentInterface";
 import { ILoginUser, IRegisterUser, IToken} from './AuthInterface'
-import {IEventCard, IEventCode, IEventInterface} from './EventInterface'
+import {IEventCard, IEventCode, IEventInterface, IEditEventCard} from './EventInterface'
 
 export type {
     IComment,
@@ -11,5 +11,6 @@ export type {
     IToken,
     IEventCard,
     IEventCode,
-    IEventInterface
+    IEventInterface,
+    IEditEventCard
 }

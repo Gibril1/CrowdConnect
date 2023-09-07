@@ -13,6 +13,14 @@ export interface IEventCard{
 
 }
 
+export interface IEditEventCard{
+    id: number
+    name: string,
+    description: string,
+    is_active: boolean
+
+}
+
 export interface IEventCode{
     entry_code?: string
 }
