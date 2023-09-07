@@ -2,8 +2,14 @@ import { useAppSelector } from '../../app/hooks';
 import { CommentForm, Comments, Navbar, EventCard } from '../../components';
 import './Conversation.css'
 
+
 const Conversation = () => {
+  
+  
   const { conversations } = useAppSelector((state) => state.conversation);
+
+  
+  
 
   // Ensure conversations is defined and has the necessary properties.
   if (!conversations) {
@@ -17,8 +23,11 @@ const Conversation = () => {
     );
   }
 
+
   const { event, comments } = conversations;
 
+  
+  
   
 
   return (

@@ -23,7 +23,7 @@ const CodeInputForm = () => {
     
     const { eventId } = formData
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async(e:any) => {
         e.preventDefault()
         if(!eventId){
             setTextColor(true)
@@ -34,7 +34,7 @@ const CodeInputForm = () => {
           'entry_code': eventId
         }
 
-        dispatch(checkEventAvailability(eventInfo))
+        await dispatch(checkEventAvailability(eventInfo))
         navigate('/chat')
     }
   return (
