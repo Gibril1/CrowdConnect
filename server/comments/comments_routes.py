@@ -14,8 +14,8 @@ comments = APIRouter(
 
 
 @comments.post('/{event_id}', status_code=status.HTTP_201_CREATED)
-def create_comments(event_id:int, comment_:CommentSchema,db:Session=Depends(get_db), current_user = Depends(get_current_user)):
-    return create(event_id, db, comment_, current_user)
+def create_comments(event_id:int, comment_:CommentSchema,db:Session=Depends(get_db)):
+    return create(event_id, db, comment_)
 
 @comments.get('/{event_id}', status_code=status.HTTP_201_CREATED)
 def get_event_comments(event_id:int, db:Session=Depends(get_db), current_user = Depends(get_current_user)):

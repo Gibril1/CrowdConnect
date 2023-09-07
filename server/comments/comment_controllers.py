@@ -2,7 +2,6 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from .comments_schemas import CommentSchema
 from .comment_models import Comment
-from events.event_controllers import get_user_id
 from events.event_models import Event
 from config.db import SessionLocal
 
@@ -14,13 +13,11 @@ def get_event(payload):
     return None
 
 
-def create(event_id:int, db:Session, comment_:CommentSchema, current_user):
-    user = get_user_id(current_user)
+def create(event_id:int, db:Session, comment_:CommentSchema):
     event = get_event(event_id)
     if event is not None:
         new_comment = Comment(
             comment = comment_.comment,
-            user_id = user,
             events_id = event
         )
         db.add(new_comment)

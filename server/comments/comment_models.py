@@ -7,8 +7,8 @@ class Comment(BASE):
 
     id = Column(Integer, primary_key=True, index=True)
     comment = Column(String)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    # user_id = Column(Integer, ForeignKey('users.id'))
     events_id = Column(Integer, ForeignKey('events.id'))
 
-    created_by = relationship('User', back_populates='comments')
+    # created_by = relationship('User', back_populates='comments')
     events = relationship('Event', back_populates='comments')
