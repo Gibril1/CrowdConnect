@@ -53,8 +53,19 @@ const editEventDetails = async(eventData:IEditEventCard,token:string) => {
 
     const response = await axios.put(API_URL_LOCAL+`event/${eventData.id}`, event, config)
 
-    console.log('response.data')
-    console.log(response.data)
+    
+    return response.data
+}
+const deleteEvent = async(id:number,token:string) => {
+    const config = {
+        headers : {
+            'Authorization': `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.delete(API_URL_LOCAL+`event/${id}`, config)
+
+    
     return response.data
 }
 
@@ -62,7 +73,8 @@ const eventService = {
     createEvent,
     getEvents,
     getEvent,
-    editEventDetails
+    editEventDetails,
+    deleteEvent
 }
 
 export default eventService

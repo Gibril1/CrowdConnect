@@ -79,6 +79,21 @@ export const edit = createAsyncThunk('events/update', async(eventData:IEditEvent
     }
 })
 
+export const remove = createAsyncThunk('events/delete', async(id:number, thunkAPI) => {
+    try {
+        const tokenString = localStorage.getItem('user') || '{}'
+        const token:IToken = JSON.parse(tokenString)
+        return await eventService.deleteEvent(id,token.access_token)
+    } catch (error:any) {
+        const message = (error.response &&
+            error.response.data &&
+            error.response.data.message)||
+            error.message ||
+            error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 export const eventSlice = createSlice({
     name: 'event',
     initialState,
@@ -158,7 +173,26 @@ export const eventSlice = createSlice({
                 state.isLoading = false
                 state.isError = true
                 state.isSuccess = false
-                state.events = []
+                state.message = action.payload
+            })
+            .addCase(remove.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isError = false
+                state.isSuccess = true
+                const deletedEventId = action.payload; 
+                const index = state.events.findIndex(event => event.id === deletedEventId);
+
+                if (index !== -1) {
+                    state.events.splice(index, 1);     
+                    }
+                })
+            .addCase(remove.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(remove.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
                 state.message = action.payload
             })
     }

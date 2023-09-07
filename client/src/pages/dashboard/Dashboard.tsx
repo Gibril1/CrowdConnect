@@ -5,6 +5,8 @@ import { IEventCard } from "../../interfaces/EventInterface";
 import { getAll } from "../../services/event/EventSlice";
 import { useEffect} from 'react'
 import './Dashboard.css'
+import { remove } from "../../services/event/EventSlice";
+
 const Dashboard = () => {
   const dispatch = useAppDispatch()
 
@@ -13,6 +15,10 @@ const Dashboard = () => {
   }, [])
   
   const { events } = useAppSelector((state) => state.event);
+
+  const deleteEvent = (eventId: number) => {
+    dispatch(remove(eventId));
+  };
 
   return (
     <div className="dashboard">
@@ -26,7 +32,11 @@ const Dashboard = () => {
           <>
             <h2>You have events here</h2>
             {events.map((eventDetail: IEventCard) => (
-              <EventCard key={eventDetail.id} eventDetail={eventDetail} />
+              <EventCard  
+              key={eventDetail.id} 
+              eventDetail={eventDetail}
+              onDelete={() => deleteEvent(eventDetail.id)}
+               />
             ))}
           </>
         )} 

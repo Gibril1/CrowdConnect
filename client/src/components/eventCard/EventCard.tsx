@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { checkEventAvailability } from "../../services/conversation/ConversationSlice";
 import {GoPencil} from 'react-icons/go'
+import {RiDeleteBin6Line} from 'react-icons/ri'
+import { remove } from "../../services/event/EventSlice";
+
 interface EventCardProps {
-  eventDetail: IEventCard
+  eventDetail: IEventCard,
+  onDelete: () => void;
 }
 
 
-
-const EventCard: React.FC<EventCardProps> = ({ eventDetail }) => {
+const EventCard: React.FC<EventCardProps> = ({ eventDetail, onDelete }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -26,10 +29,16 @@ const EventCard: React.FC<EventCardProps> = ({ eventDetail }) => {
   const editEvent = () => {
     navigate(`event/${eventDetail.id}`)
   }
+
+  const deleteEvent =() => {
+    dispatch(remove(eventDetail.id))
+    onDelete();
+  }
   return (
     <div className={eventDetail.is_active ? 'event-card green-border':'event-card red-border'}>
-      <div onClick={editEvent}>
-        <GoPencil/>
+      <div>
+        <div onClick={editEvent}><GoPencil/></div>
+        <div onClick={deleteEvent}><RiDeleteBin6Line/></div>
       </div>
       <p onClick={getConversations} >{eventDetail.name}</p>
       <p>{eventDetail.description}</p>
