@@ -1,10 +1,21 @@
-import { useAppSelector } from '../../app/hooks';
+import { useEffect} from 'react'
+import { useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { CommentForm, Comments, Navbar, EventCard } from '../../components';
 import './Conversation.css'
+import { checkEventAvailability } from '../../services/conversation/ConversationSlice';
 
 
 const Conversation = () => {
-  
+  const dispatch = useAppDispatch()
+  const { entry_code } = useParams()
+
+  useEffect(() => {
+    const eventInfo = {
+      entry_code
+    }
+      dispatch(checkEventAvailability(eventInfo))
+  }, [entry_code])
   
   const { conversations } = useAppSelector((state) => state.conversation);
 
@@ -17,7 +28,7 @@ const Conversation = () => {
       <>
         <Navbar />
         <main>
-          <h2>No conversation data available.</h2>
+          <h2>Such event does not exist</h2>
         </main>
       </>
     );

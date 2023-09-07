@@ -35,7 +35,7 @@ const CodeInputForm = () => {
         }
 
         await dispatch(checkEventAvailability(eventInfo))
-        navigate('/chat')
+        navigate(`/chat/${eventId}`)
     }
   return (
     <form onSubmit={handleSubmit}>

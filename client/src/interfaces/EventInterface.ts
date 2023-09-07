@@ -14,5 +14,5 @@ export interface IEventCard{
 }
 
 export interface IEventCode{
-    entry_code: string
+    entry_code?: string
 }

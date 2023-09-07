@@ -20,7 +20,7 @@ const EventCard: React.FC<EventCardProps> = ({ eventDetail }) => {
       'entry_code': eventDetail.entry_code
     }
     dispatch(checkEventAvailability(eventInfo))
-    navigate('/chat')
+    navigate(`/chat/${eventDetail.entry_code}`)
   }
   return (
     <div onClick={getConversations} className={eventDetail.is_active ? 'event-card green-border':'event-card red-border'}>
