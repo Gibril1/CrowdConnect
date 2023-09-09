@@ -40,23 +40,29 @@ const Login = () => {
     }
 
     await dispatch(login(userData))
+    dispatch((reset()))
   }
 
-  const { user, isError, isLoading, isSuccess } = useAppSelector((state) => state.auth)
+  const { user, isError, isLoading, isSuccess, message } = useAppSelector((state) => state.auth)
+  useEffect(() => {
+    // Check if the user is already logged in when the component mounts
+    if (isSuccess && user) {
+      toast.success('Successful Login');
+      navigate('/new');
+    }
+  }, [isSuccess, user, navigate]);
 
   useEffect(() => {
-    if(isError){
-        toast.error('Invalid Credentials')
-        return
+    // Redirect to another page if the user is already logged in
+    if (user) {
+      navigate('/new');
     }
-
-    if(isSuccess && user !== undefined){
-        toast.success('Login successful')
-        navigate('/events')
-    }
-    dispatch(reset())
-    },[isError, isSuccess, user, dispatch, navigate])
-  return (
+  }, [user, navigate]);
+  
+  if(isError){
+    toast.error(message)
+  }
+    return (
     <div>
       <Navbar/>
       <main className="register-page">

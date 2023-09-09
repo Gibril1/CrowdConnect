@@ -31,6 +31,8 @@ const Register = () => {
 
   const { username, email, password, password2 } = formData
 
+  const { user, isError, isLoading, isSuccess, message } = useAppSelector((state) => state.auth)
+
 
   const handleSubmit = async(e:any) => {
     
@@ -52,26 +54,29 @@ const Register = () => {
       password
     }
 
-    await dispatch(register(userData))   
+    await dispatch(register(userData))
+    dispatch(reset())   
   }
-  const { user, isError, isLoading, isSuccess } = useAppSelector((state) => state.auth)
 
   useEffect(() => {
-    if(isError){
-        console.log('we are here. there is an error')
-        console.log({
-          user, isError, isLoading, isSuccess
-        })
-        toast.error('An error occurred during sign up')
-        return
+    // Check if the user is already logged in when the component mounts
+    if (isSuccess && user) {
+      toast.success('Successful Registration');
+      navigate('/new');
     }
+  }, [isSuccess, user, navigate]);
 
-    if(isSuccess && user !== undefined){
-        toast.success('Registeration successful')
-        navigate('/new')
+  useEffect(() => {
+    // Redirect to another page if the user is already logged in
+    if (user) {
+      navigate('/new');
     }
-    dispatch(reset())
-    },[isError, isSuccess, user, dispatch, navigate])
+  }, [user, navigate]);
+  
+  if(isError){
+    toast.error(message)
+  }
+  
     return (
     <div>
       <Navbar/>

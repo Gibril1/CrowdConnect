@@ -15,6 +15,7 @@ const Navbar = () => {
   
   
   const { user } = useAppSelector((state) => state.auth)
+  
   return (
     <div className='navbar'>
         <h1 className='logo' onClick={() => navigate('/')}>Crowd Connect <span><GiConvergenceTarget/></span></h1>

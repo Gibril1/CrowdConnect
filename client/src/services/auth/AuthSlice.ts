@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import authService from "./AuthService";
 import { ILoginUser, IRegisterUser } from '../../interfaces/AuthInterface';
 
@@ -6,6 +6,7 @@ interface User{
     email: string,
     username: string,
 }
+
 
 interface UserState {
     user: User |  null
@@ -15,10 +16,12 @@ interface UserState {
     message: any
 }
 
-const user = JSON.parse(localStorage.getItem('user') || '{}') 
+const user = JSON.parse(localStorage.getItem('user') || 'null') 
+
+
 
 const initialState = {
-    user: user ? user : null,
+    user: user === null ? null : user,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -34,6 +37,8 @@ export const register = createAsyncThunk('auth/register', async(user:IRegisterUs
             error.response.data.message)||
             error.message ||
             error.toString()
+            console.log('the error message')
+            console.log(message)
         return thunkAPI.rejectWithValue(message)
     }
 })
@@ -78,11 +83,20 @@ export const authSlice = createSlice({
             state.message = action.payload
             state.user = null
         })
-        .addCase(register.fulfilled, (state, action:PayloadAction<User>) => {
-            state.isLoading = false
-            state.isSuccess = true
-            state.isError = false
-            state.user = action.payload
+        .addCase(register.fulfilled, (state, action) => {
+            
+            if(action.payload.detail){
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload.detail
+                state.user = null
+            }else{
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.user = action.payload
+            }
+            
         })
         .addCase(logout.rejected, (state, action) => {
             state.isLoading = false
@@ -102,11 +116,18 @@ export const authSlice = createSlice({
             state.message = action.payload
             state.user = null
         })
-        .addCase(login.fulfilled, (state, action:PayloadAction<User>) => {
-            state.isLoading = false
-            state.isSuccess = true
-            state.isError = false
-            state.user = action.payload
+        .addCase(login.fulfilled, (state, action) => {
+            if(action.payload.detail){
+                state.isError = true
+                state.isLoading = false
+                state.message = action.payload.detail
+                state.user = null
+            }else{
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.user = action.payload
+            }
         })
     }
 })
