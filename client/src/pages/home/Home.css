@@ -1,5 +1,30 @@
-.bg-white{
-    background-color: var(--white-color);
+.bg{
+    padding: 20px;
+    background: var(--white-color);
+    overflow: hidden;
+}
+
+.home {
+    position: relative;
+    overflow: hidden;
+}
+.shape{
+    border-radius: 100% 0% 79% 21% / 100% 40% 60% 0% ;
+    background-color: var(--primary-color);
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 350px;
+    left: 250px;
+}
+.shape-right{
+    border-radius: 100% 0% 79% 21% / 100% 40% 60% 0% ;
+    background-color: var(--primary-color);
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 250px;
+    right: 250px;
 }
 
 .hero{
@@ -7,19 +32,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid red; */
     margin: 50px 0;
 }
 
 .hero h1{
-    font-weight: 900;
-    font-size: 60px;
+    font-weight: bold;
+    font-size: 50px;
     text-align: center;
     line-height: 1.5;
-    color: var(--primary-color);
+    margin: 2rem 0;
+    padding: 1rem;
 }
 
+.hero-call-to-action{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
+.typing-animation{
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 4s steps(30) infinite;
+}
+
+@keyframes typing {
+    0%{ width: 0;}
+    100%{ width: 100%;}
+}
 
 .input-container{
     display: flex;
@@ -41,6 +81,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-top: 70px;
+    margin-bottom: 20px;
 }
 
 .section-icon{
@@ -68,4 +109,16 @@
 
 .section-text p{
     margin-top: -5px;
+}
+
+.social-icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #eee; */
+    padding: 20px;
+    /* border: 1px solid red; */
+    margin-top: 2rem;
+    margin: 0 100px;
+    /* width: 100vw; */
 }

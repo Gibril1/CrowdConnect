@@ -17,21 +17,24 @@ const Navbar = () => {
   const { user } = useAppSelector((state) => state.auth)
   
   return (
-    <div className='navbar'>
-        <h1 className='logo' onClick={() => navigate('/')}>Crowd Connect <span><GiConvergenceTarget/></span></h1>
-        { user ? (
-          <>
-            <button className='btn btn-primary' onClick={() => navigate('/new')}>New Event</button>
-            <button className='btn btn-border' onClick={handleLogout}>Logout</button>
-          </> 
-        ):(
-          <>
-            <button className='btn btn-border' onClick={() => navigate('/login')}>Login</button>
-            <button className='btn btn-primary' onClick={() => navigate('/register')}>Join Here</button>
-          </>
-          
-        )}
-        
+    <div className=''>
+        <div className="container">
+          <div className="navbar">
+            <h1 className='logo' onClick={() => navigate('/')}>Crowd Connect <span><GiConvergenceTarget/></span></h1>
+            { user ? (
+              <>
+                <button className='btn btn-primary' onClick={() => navigate('/new')}>New Event</button>
+                <button className='btn btn-border' onClick={handleLogout}>Logout</button>
+              </> 
+            ):(
+              <>
+                <p className='btn btn-none' onClick={() => navigate('/login')}>Login</p>
+                <button className='btn btn-primary' onClick={() => navigate('/register')}>Join Here</button>
+              </>
+              
+            )}
+          </div>
+        </div>
     </div>
   )
 }

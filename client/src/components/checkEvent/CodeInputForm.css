@@ -1,8 +1,54 @@
 .visible{
     color: red;
     visibility: visible;
+    text-align: center;
 }
 
 .invisible{
     visibility: hidden;
+}
+
+.check-event{
+    padding: 10px 25px;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    font-weight: bolder;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.check-event p {
+    text-align: center;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.check-event .input-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.hash-tag{
+    background-color: white;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.input-box input.borderless-input{
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #000;
+}
+
+.btn-icon{
+    /* border: 1px solid red; */
+    margin-left: 10px;
 }

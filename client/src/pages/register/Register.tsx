@@ -75,6 +75,7 @@ const Register = () => {
   
   if(isError){
     toast.error(message)
+    return
   }
   
     return (

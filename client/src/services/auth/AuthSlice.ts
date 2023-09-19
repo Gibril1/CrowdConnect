@@ -78,13 +78,14 @@ export const authSlice = createSlice({
             state.isLoading = true
         })
         .addCase(register.rejected, (state, action) => {
+            console.log('rejection called')
             state.isLoading = false
             state.isError = true
             state.message = action.payload
             state.user = null
         })
         .addCase(register.fulfilled, (state, action) => {
-            
+            console.log('success called')
             if(action.payload.detail){
                 state.isLoading = false
                 state.isError = true

@@ -5,34 +5,29 @@
     font-family: 'Open Sans', sans-serif;
 }
 :root{
-    --primary-color: #3B3355;
-    --white-color: #fefcfd
+    --white-color: #fff;
+    --primary-color: #008585;
+    --secondary-color: #fbf2c4;
+}
+
+.primary-color{
+    color: var(--primary-color);
 }
 
 .mr-1{
     margin-right: 1px;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid red; */
-    margin: 0 70px;
-}
+
 
 .align-center{
     text-align: center;
 }
 .btn{
-    /* border: 1px solid red; */
     padding: 10px 20px;
     font-weight: 300;
     font-size: 16px;
-    border-radius: 8px;
     border: none;
-    background-color: var(--white-color);
 }
 
 .btn-primary{
@@ -44,7 +39,14 @@
     border: 1px solid var(--primary-color);
 }
 
+.btn-primary:hover{
+    background-color: #000;
+}
 
+.btn-none:hover{
+    text-decoration: underline;
+    color: var(--primary-color);
+}
 
 .btn:hover{
     cursor: pointer;
@@ -55,7 +57,7 @@
 }
 
 .btn-auth:hover{
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 img{

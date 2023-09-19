@@ -1,22 +1,35 @@
 import './Home.css'
-import {PiNumberOneLight, PiNumberTwoLight, PiNumberThreeLight} from 'react-icons/pi'
-import {BiConversation} from 'react-icons/bi'
+import {
+  PiNumberOneLight,
+  PiNumberTwoLight,
+  PiNumberThreeLight,
+  BiConversation,
+  BsFacebook,
+  BsInstagram,
+  BsTiktok,
+  BsTwitter,
+  BsYoutube
+} from '../../utils/icons'
 import { CodeInputForm, Navbar } from '../../components';
-
+import { chatIcons, icons, socialIcon } from '../../utils/styles';
 
 const Home = () => {
-  // style icons
-  let icons = { border: '1px solid #3b3355', fontSize: '50px', borderRadius: '50%', padding: '15px'}
   return (
-    <div className="bg-white">
+    <div className="bg">
       <Navbar />
-      <div className="container">
+      <div className="container home">
+        <div className="shape"></div>
+        <div className="shape-right"></div>
         <div className="hero">
-          <h1>Amplify Every Voice, Inspire Meaningful<br></br><span className="align-center mr-1">Connections with Crowd Connect</span><BiConversation/></h1>
+          <div className="input-container">
+            <CodeInputForm/>
+          </div>
+          <h1 className='typing-animation'>Amplify Every Voice, <span className='primary-color'>Inspire Meaningful <br></br> Connections</span> with Crowd Connect</h1>
+          <div>
+            <BiConversation style={chatIcons}/>
+          </div>
         </div>
-        <div className="input-container">
-          <CodeInputForm/>
-        </div>
+    {/* showcase */}
         <div className="showcase">
           <div className="section">
             <div className="section-icon">
@@ -46,6 +59,13 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className="social-icons">
+            <div><BsFacebook style={socialIcon}/></div>
+            <div><BsTiktok style={socialIcon}/></div>
+            <div><BsTwitter style={socialIcon}/></div>
+            <div><BsInstagram style={socialIcon}/></div>
+            <div><BsYoutube style={socialIcon}/></div>
+          </div>
       </div>
     </div>
   );
